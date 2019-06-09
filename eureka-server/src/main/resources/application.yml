@@ -1,11 +1,18 @@
 server:
   port: 8761
 
+spring:
+  application:
+    name: eureka-server-${server.port}
+#  cloud:
+#    config:
+#      uri: http://localhost:1115
+
 eureka:
   instance:
-    hostname: localhost
+    hostname: server.eureka.com
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: false #是否将自己也注册到其他eureka节点上。一般设置为true或者默认即可，这样才会在eureka控制台上看到所有的eureka集群列表信息
+    fetchRegistry: false #获取注册列表
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
