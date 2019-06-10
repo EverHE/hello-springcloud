@@ -1,18 +1,38 @@
 server:
   port: 8761
-
 spring:
+  profiles: node1
   application:
-    name: eureka-server-${server.port}
+    name: eureka-server
 #  cloud:
 #    config:
 #      uri: http://localhost:1115
 
 eureka:
   instance:
-    hostname: server.eureka.com
+    hostname: server.node1.eureka.com
   client:
-    registerWithEureka: false #是否将自己也注册到其他eureka节点上。一般设置为true或者默认即可，这样才会在eureka控制台上看到所有的eureka集群列表信息
-    fetchRegistry: false #获取注册列表
+    registerWithEureka: true #是否将自己也注册到其他eureka节点上。一般设置为true或者默认即可，这样才会在eureka控制台上看到所有的eureka集群列表信息
+    fetchRegistry: true #获取注册列表
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+      defaultZone: http://server.node2.eureka.com:8762/eureka/
+
+---
+server:
+  port: 8762
+spring:
+  profiles: node2
+  application:
+    name: eureka-server
+#  cloud:
+#    config:
+#      uri: http://localhost:1115
+
+eureka:
+  instance:
+    hostname: server.node2.eureka.com
+  client:
+    registerWithEureka: true #是否将自己也注册到其他eureka节点上。一般设置为true或者默认即可，这样才会在eureka控制台上看到所有的eureka集群列表信息
+    fetchRegistry: true #获取注册列表
+    serviceUrl:
+      defaultZone: http://server.node1.eureka.com:8761/eureka/

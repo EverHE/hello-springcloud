@@ -30,6 +30,8 @@
   <modules>
     <module>config-server</module>
     <module>eureka-server</module>
+    <module>eureka-client</module>
+    <module>feign-hystrix</module>
     <module>route-zuul</module>
   </modules>
 

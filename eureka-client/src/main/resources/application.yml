@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: eureka-client-${server.port}
+    name: eureka-client
 
 eureka:
   instance:
@@ -11,4 +11,4 @@ eureka:
 #    lease-renewal-interval-in-seconds: 5 # \u5FC3\u8DF3\u65F6\u95F4\uFF0C\u8868\u793Aeureka client\u53D1\u9001\u5FC3\u8DF3\u7ED9eureka server\u7AEF\u7684\u9891\u7387\uFF08\u7F3A\u7701\u4E3A30s\uFF09
   client:
     service-url:
-      defaultZone: http://server.eureka.com:8761/eureka # \u6307\u5B9Aeureka\u670D\u52A1\u5668\u96C6\u7FA4\u5217\u8868\u5730\u5740
+      defaultZone: http://server.node1.eureka.com:8761/eureka/,http://server.node2.eureka.com:8762/eureka/ # \u6307\u5B9Aeureka\u670D\u52A1\u5668\u96C6\u7FA4\u5217\u8868\u5730\u5740
