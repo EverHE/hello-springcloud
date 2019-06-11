@@ -30,7 +30,14 @@ spring:
 
 eureka:
   instance:
+    #使用主机名注册服务
     hostname: server.node2.eureka.com
+    #使用IP地址方式进行注册服务(次参数为true时，优先使用ip进行注册)
+    #prefer-ip-address: true
+    #指定注册的ip
+    #ip-address: 127.0.0.1
+    #注册到服务中心显示的名称
+    #instance-id: ${spring.application.name}:${server.port}:@project.version@
   client:
     registerWithEureka: true #是否将自己也注册到其他eureka节点上。一般设置为true或者默认即可，这样才会在eureka控制台上看到所有的eureka集群列表信息
     fetchRegistry: true #获取注册列表

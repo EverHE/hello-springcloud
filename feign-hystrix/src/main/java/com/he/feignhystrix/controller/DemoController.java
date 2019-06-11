@@ -13,6 +13,6 @@ public class DemoController {
 
     @RequestMapping(value = "hello")
     public String hello(@RequestParam String name){
-        return "";
+        return demoService.hello(name);
     }
 }
