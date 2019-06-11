@@ -17,9 +17,9 @@ spring:
           #uri: https://github.com/hansonwang99/{application}
           uri: https://github.com/EverHE/config-repo.git
           #用户名
-          username: heleiever@hotmail.com
+          username: aaa@hotmail.com
           #密码
-          password: ever88642356
+          password: aaa
           #仓库路径
           #search-paths: respo
           #配置中心远程clone下来的配置文件所在的位置。默认情况下，它们放在系统临时目录中，前缀为config-repo-。(linux，/tmp/config-repo-xxx)
