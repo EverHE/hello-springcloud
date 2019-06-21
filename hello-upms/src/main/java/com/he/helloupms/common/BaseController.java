@@ -20,14 +20,14 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
     }
 
 
-    @RequestMapping("page")
+    @PostMapping("page")
     @ResponseBody
     public Result test2(@RequestBody Page<T> page) {
         service.page(page);
         return Result.success(page);
     }
 
-    @RequestMapping("insert")
+    @PostMapping("insert")
     @ResponseBody
     public Result insert(@RequestBody T entity) {
         boolean b = service.save(entity);
@@ -37,20 +37,19 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
         return Result.fail();
     }
 
-    @RequestMapping("update")
+    @PostMapping("update")
     @ResponseBody
     public Result update(@RequestBody T entity) {
-        UpdateWrapper wrapper = new UpdateWrapper(entity);
-        boolean b = service.update(wrapper);
+        boolean b = service.updateById(entity);
         if(b){
             return Result.success();
         }
         return Result.fail();
     }
 
-    @RequestMapping("delete")
+    @GetMapping("delete/{id}")
     @ResponseBody
-    public Result delete(@RequestBody Long id) {
+    public Result delete(@PathVariable("id") Long id) {
         boolean b = service.removeById(id);
         if(b){
             return Result.success();
@@ -58,7 +57,7 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
         return Result.fail();
     }
 
-    @RequestMapping("deletes")
+    @PostMapping("deletes")
     @ResponseBody
     public Result deletes(@RequestBody List<Long> ids) {
         boolean b = service.removeByIds(ids);
@@ -68,13 +67,13 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
         return Result.fail();
     }
 
-    @RequestMapping("getById")
+    @GetMapping("getById/{id}")
     @ResponseBody
-    public Result getById(@RequestBody Long id) {
+    public Result getById(@PathVariable("id") Long id) {
         return Result.success(service.getById(id));
     }
 
-    @RequestMapping("count")
+    @PostMapping("count")
     @ResponseBody
     public Result count(@RequestBody T entity) {
         QueryWrapper wrapper = new QueryWrapper(entity);
