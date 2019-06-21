@@ -18,6 +18,10 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+    <mybatis-plus.version>3.1.0</mybatis-plus.version>
+    <fastjson.version>1.2.35</fastjson.version>
+    <hutool.version>4.5.13</hutool.version>
+    <druid-starter.version>1.1.10</druid-starter.version>
   </properties>
 
   <parent>
@@ -33,6 +37,7 @@
     <module>eureka-client</module>
     <module>feign-hystrix</module>
     <module>route-zuul</module>
+    <module>hello-upms</module>
   </modules>
 
   <dependencyManagement>
@@ -43,6 +48,29 @@
         <version>${spring-cloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid-starter.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
