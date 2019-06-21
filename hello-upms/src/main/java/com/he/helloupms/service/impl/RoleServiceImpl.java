@@ -10,11 +10,9 @@ import java.util.List;
 
 @Service
 public class RoleServiceImpl extends BaseService<ISysRoleMapper,SysRole> implements IRoleService {
-    @Autowired
-    private ISysRoleMapper sysRoleMapper;
 
     @Override
     public List<SysRole> getRoleByUserId(Integer userId) {
-        return sysRoleMapper.getRoleByUserId(userId);
+        return baseMapper.getRoleByUserId(userId);
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.he.mapper.*")
+@MapperScan("com.he.helloupms.mapper")
 //@MapperScan({"com.he.dao.mapper.sys*","com.he.dao.mapper.biz*"})
 public class MybatisPlusConfig {
 

@@ -30,7 +30,7 @@ public class BaseEntity<PK>{
      */
     @JSONField(serialize = false)
     @Version
-    private Integer versn;
+    private Integer version;
 
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT)
@@ -54,7 +54,7 @@ public class BaseEntity<PK>{
 
     public BaseEntity() {
         this.uuid = this.generateUuid();
-        this.versn = 0;
+        this.version = 0;
         this.status = StatusEnum.STATUS_NORMAL;
     }
 

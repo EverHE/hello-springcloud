@@ -5,8 +5,6 @@ import com.he.helloupms.common.BaseEntity;
 import com.he.helloupms.enums.SexEnum;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class SysUser extends BaseEntity<Long> {
     /**
@@ -16,7 +14,7 @@ public class SysUser extends BaseEntity<Long> {
     /**
      * 用户姓名
      */
-    private String name;
+    private String userName;
     /**
      * 密码
      */
@@ -42,15 +40,7 @@ public class SysUser extends BaseEntity<Long> {
      */
     private String email;
     /**
-     * 修改密码时间
-     */
-    private Date modPwdTime;
-    /**
      * 备注
      */
     private String remark;
-    /**
-     * 区域id
-     */
-    private String areaId;
 }

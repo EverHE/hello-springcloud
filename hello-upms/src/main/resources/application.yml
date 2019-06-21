@@ -1,158 +1,158 @@
 spring:
   datasource:
-    # jdbc\u914D\u7F6E
+    # jdbc配置
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://120.55.54.42:3306/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://120.55.54.42:11987/hello?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 1qaz@WSX
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      # \u8FDE\u63A5\u6C60\u7684\u8BBE\u7F6E
-      # \u521D\u59CB\u5316\u65F6\u5EFA\u7ACB\u7269\u7406\u8FDE\u63A5\u7684\u4E2A\u6570
+      # 连接池的设置
+      # 初始化时建立物理连接的个数
       initial-size: 5
-      # \u6700\u5C0F\u8FDE\u63A5\u6C60\u6570\u91CF
+      # 最小连接池数量
       min-idle: 5
-      # \u6700\u5927\u8FDE\u63A5\u6C60\u6570\u91CF maxIdle\u5DF2\u7ECF\u4E0D\u518D\u4F7F\u7528
+      # 最大连接池数量 maxIdle已经不再使用
       max-active: 20
-      # \u83B7\u53D6\u8FDE\u63A5\u65F6\u6700\u5927\u7B49\u5F85\u65F6\u95F4\uFF0C\u5355\u4F4D\u6BEB\u79D2
+      # 获取连接时最大等待时间，单位毫秒
       max-wait: 60000
-      # \u914D\u7F6E\u95F4\u9694\u591A\u4E45\u624D\u8FDB\u884C\u4E00\u6B21\u68C0\u6D4B\uFF0C\u68C0\u6D4B\u9700\u8981\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\uFF0C\u5355\u4F4D\u662F\u6BEB\u79D2
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       time-between-eviction-runs-millis: 60000
-      # \u914D\u7F6E\u4E00\u4E2A\u8FDE\u63A5\u5728\u6C60\u4E2D\u6700\u5C0F\u751F\u5B58\u7684\u65F6\u95F4\uFF0C\u5355\u4F4D\u662F\u6BEB\u79D2
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 300000
       validation-query: SELECT 1 FROM DUAL
-      # \u7533\u8BF7\u8FDE\u63A5\u7684\u65F6\u5019\u68C0\u6D4B\uFF0C\u5982\u679C\u7A7A\u95F2\u65F6\u95F4\u5927\u4E8EtimeBetweenEvictionRunsMillis\uFF0C\u6267\u884CvalidationQuery\u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548
+      # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
       test-while-idle: true
-      # \u7533\u8BF7\u8FDE\u63A5\u65F6\u4F1A\u6267\u884CvalidationQuery\u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548,\u5F00\u542F\u4F1A\u964D\u4F4E\u6027\u80FD,\u9ED8\u8BA4\u4E3Atrue
+      # 申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
       test-on-borrow: false
-      # \u5F52\u8FD8\u8FDE\u63A5\u65F6\u4F1A\u6267\u884CvalidationQuery\u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548,\u5F00\u542F\u4F1A\u964D\u4F4E\u6027\u80FD,\u9ED8\u8BA4\u4E3Atrue
+      # 归还连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
       test-on-return: false
-      # \u5F53\u6570\u636E\u5E93\u629B\u51FA\u4E0D\u53EF\u6062\u590D\u7684\u5F02\u5E38\u65F6,\u629B\u5F03\u8BE5\u8FDE\u63A5
+      # 当数据库抛出不可恢复的异常时,抛弃该连接
       #exception-sorter: true
-      # \u662F\u5426\u7F13\u5B58preparedStatement,mysql5.5+\u5EFA\u8BAE\u5F00\u542F
+      # 是否缓存preparedStatement,mysql5.5+建议开启
       pool-prepared-statements: true
-      # \u5F53\u503C\u5927\u4E8E0\u65F6poolPreparedStatements\u4F1A\u81EA\u52A8\u4FEE\u6539\u4E3Atrue
+      # 当值大于0时poolPreparedStatements会自动修改为true
       max-pool-prepared-statement-per-connection-size: 20
       use-global-data-source-stat: true
-      # \u901A\u8FC7connectProperties\u5C5E\u6027\u6765\u6253\u5F00mergeSql\u529F\u80FD\uFF1B\u6162SQL\u8BB0\u5F55
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
       aop-patterns: com.he.*
 
 
-      # \u662F\u5426\u542F\u7528StatViewServlet\uFF08\u76D1\u63A7\u9875\u9762\uFF09\u9ED8\u8BA4\u503C\u4E3Afalse\uFF08\u8003\u8651\u5230\u5B89\u5168\u95EE\u9898\u9ED8\u8BA4\u5E76\u672A\u542F\u52A8\uFF0C\u5982\u9700\u542F\u7528\u5EFA\u8BAE\u8BBE\u7F6E\u5BC6\u7801\u6216\u767D\u540D\u5355\u4EE5\u4FDD\u969C\u5B89\u5168\uFF09
+      # 是否启用StatViewServlet（监控页面）默认值为false（考虑到安全问题默认并未启动，如需启用建议设置密码或白名单以保障安全）
       stat-view-servlet:
         enabled: true
         login-username: admin
         login-password: 123456
-        # \u662F\u5426\u5141\u8BB8\u6E05\u9664\u8BB0\u5F55
+        # 是否允许清除记录
         reset-enable: false
         url-pattern: /druid/*
-      # \u6DFB\u52A0IP\u767D\u540D\u5355
+      # 添加IP白名单
       #allow:
-      # \u6DFB\u52A0IP\u9ED1\u540D\u5355\uFF0C\u5F53\u767D\u540D\u5355\u548C\u9ED1\u540D\u5355\u91CD\u590D\u65F6\uFF0C\u9ED1\u540D\u5355\u4F18\u5148\u7EA7\u66F4\u9AD8
+      # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
       #deny:
 
-      # WebStatFilter\u914D\u7F6E
+      # WebStatFilter配置
       web-stat-filter:
         enabled: true
-        # \u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219
+        # 添加过滤规则
         url-pattern: /*
-        # \u5FFD\u7565\u8FC7\u6EE4\u683C\u5F0F
+        # 忽略过滤格式
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-        # session\u7EDF\u8BA1\u529F\u80FD
+        # session统计功能
         session-stat-enable: true
-        # \u6700\u5927session\u6570 \u9ED8\u8BA41000
+        # 最大session数 默认1000
         session-stat-max-count: 1000
-        # \u914D\u7F6EprincipalSessionName\uFF0C\u4F7F\u5F97druid\u80FD\u591F\u77E5\u9053\u5F53\u524D\u7684session\u7684\u7528\u6237\u662F\u8C01
-        # XXXX\u4FEE\u6539\u4E3A\u4F60user\u4FE1\u606F\u4FDD\u5B58\u5728session\u4E2D\u7684sessionName
-        # \u5982\u679Csession\u4E2D\u4FDD\u5B58\u7684\u662F\u975Estring\u7C7B\u578B\u7684\u5BF9\u8C61\uFF0C\u9700\u8981\u91CD\u8F7DtoString\u65B9\u6CD5\u3002
+        # 配置principalSessionName，使得druid能够知道当前的session的用户是谁
+        # XXXX修改为你user信息保存在session中的sessionName
+        # 如果session中保存的是非string类型的对象，需要重载toString方法。
         #principal-session-name: XXXX
-        # \u914D\u7F6EprincipalCookieName\uFF0C\u4F7F\u5F97druid\u77E5\u9053\u5F53\u524D\u7684user\u662F\u8C01
-        # XXXX\u4FEE\u6539\u4E3A\u4F60user\u4FE1\u606F\u4FDD\u5B58\u5728cookie\u4E2D\u7684cookieName
+        # 配置principalCookieName，使得druid知道当前的user是谁
+        # XXXX修改为你user信息保存在cookie中的cookieName
         #principal-cookie-name: XXXX
-        #\u914D\u7F6EprofileEnable\u80FD\u591F\u76D1\u63A7\u5355\u4E2Aurl\u8C03\u7528\u7684sql\u5217\u8868
+        #配置profileEnable能够监控单个url调用的sql列表
         profile-enable: true
 
-      #\u914D\u7F6E\u76D1\u63A7\u7EDF\u8BA1\u62E6\u622A\u7684filters\uFF0C\u53BB\u6389\u540E\u76D1\u63A7\u754C\u9762sql\u65E0\u6CD5\u7EDF\u8BA1\uFF0C'wall'\u7528\u4E8E\u9632\u706B\u5899
+      #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
       filters: stat,wall,slf4j
       filter:
         stat:
           enabled: true
-          # \u6279\u91CF(\u91CD\u590D)sql\u5408\u5E76
+          # 批量(重复)sql合并
           merge-sql: true
-          # SQL\u6162\u67E5\u8BE2
+          # SQL慢查询
           log-slow-sql: true
-          # \u6162\u67E5\u8BE2\u6807\u51C6\uFF0C\u9ED8\u8BA43000\uFF0C\u5355\u4F4D\u6BEB\u79D2
+          # 慢查询标准，默认3000，单位毫秒
           slow-sql-millis: 3000
         wall:
           enabled: true
-          # \u521A\u5F00\u59CB\u5F15\u5165WallFilter\u7684\u65F6\u5019\uFF0C\u628AlogViolation\u8BBE\u7F6E\u4E3Atrue\uFF0C\u800CthrowException\u8BBE\u7F6E\u4E3Afalse\u3002\u5C31\u53EF\u4EE5\u89C2\u5BDF\u662F\u5426\u5B58\u5728\u8FDD\u89C4\u7684\u60C5\u51B5\uFF0C\u540C\u65F6\u4E0D\u5F71\u54CD\u4E1A\u52A1\u8FD0\u884C\u3002
-          # \u5BF9\u88AB\u8BA4\u4E3A\u662F\u653B\u51FB\u7684SQL\u629B\u51FASQLException\uFF0C\u9ED8\u8BA4true
+          # 刚开始引入WallFilter的时候，把logViolation设置为true，而throwException设置为false。就可以观察是否存在违规的情况，同时不影响业务运行。
+          # 对被认为是攻击的SQL抛出SQLException，默认true
           throw-exception: true
-          # \u5BF9\u88AB\u8BA4\u4E3A\u662F\u653B\u51FB\u7684SQL\u8FDB\u884CLOG.error\u8F93\u51FA\uFF0C\u9ED8\u8BA4false
+          # 对被认为是攻击的SQL进行LOG.error输出，默认false
           log-violation: false
           config:
-            #\u5982\u679C\u628AselectIntoAllow\u3001deleteAllow\u3001updateAllow\u3001insertAllow\u3001mergeAllow\u90FD\u8BBE\u7F6E\u4E3Afalse\uFF0C\u8FD9\u5C31\u662F\u4E00\u4E2A\u53EA\u8BFB\u6570\u636E\u6E90\u4E86
-            selelctAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CSELECT\u8BED\u53E5
-            selectAllColumnAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CSELECT * FROM T\u8FD9\u6837\u7684\u8BED\u53E5\u3002\u5982\u679C\u8BBE\u7F6E\u4E3Afalse\uFF0C\u4E0D\u5141\u8BB8\u6267\u884Cselect * from t\uFF0C\u4F46select * from (select id, name from t) a\u3002\u8FD9\u4E2A\u9009\u9879\u662F\u9632\u5FA1\u7A0B\u5E8F\u901A\u8FC7\u8C03\u7528select *\u83B7\u5F97\u6570\u636E\u8868\u7684\u7ED3\u6784\u4FE1\u606F\u3002
-            selectIntoAllow: true    #\u9ED8\u8BA4true, SELECT\u67E5\u8BE2\u4E2D\u662F\u5426\u5141\u8BB8INTO\u5B57\u53E5
-            deleteAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CDELETE\u8BED\u53E5
-            updateAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CUPDATE\u8BED\u53E5
-            insertAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CINSERT\u8BED\u53E5
-            replaceAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CREPLACE\u8BED\u53E5
-            mergeAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CMERGE\u8BED\u53E5\uFF0C\u8FD9\u4E2A\u53EA\u5728Oracle\u4E2D\u6709\u7528
-            callAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u901A\u8FC7jdbc\u7684call\u8BED\u6CD5\u8C03\u7528\u5B58\u50A8\u8FC7\u7A0B
-            setAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u4F7F\u7528SET\u8BED\u6CD5
-            truncateAllow: true    #\u9ED8\u8BA4true, truncate\u8BED\u53E5\u662F\u5371\u9669\uFF0C\u7F3A\u7701\u6253\u5F00\uFF0C\u82E5\u9700\u8981\u81EA\u884C\u5173\u95ED
-            createTableAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u521B\u5EFA\u8868
-            alterTableAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884CAlter Table\u8BED\u53E5
-            dropTableAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u4FEE\u6539\u8868
-            commentAllow: false    #\u9ED8\u8BA4false, \u662F\u5426\u5141\u8BB8\u8BED\u53E5\u4E2D\u5B58\u5728\u6CE8\u91CA\uFF0COracle\u7684\u7528\u6237\u4E0D\u7528\u62C5\u5FC3\uFF0CWall\u80FD\u591F\u8BC6\u522Bhints\u548C\u6CE8\u91CA\u7684\u533A\u522B
-            noneBaseStatementAllow: false    #\u9ED8\u8BA4false, \u662F\u5426\u5141\u8BB8\u975E\u4EE5\u4E0A\u57FA\u672C\u8BED\u53E5\u7684\u5176\u4ED6\u8BED\u53E5\uFF0C\u7F3A\u7701\u5173\u95ED\uFF0C\u901A\u8FC7\u8FD9\u4E2A\u9009\u9879\u5C31\u80FD\u591F\u5C4F\u853DDDL\u3002
-            multiStatementAllow: false    #\u9ED8\u8BA4false, \u662F\u5426\u5141\u8BB8\u4E00\u6B21\u6267\u884C\u591A\u6761\u8BED\u53E5\uFF0C\u7F3A\u7701\u5173\u95ED
-            useAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884Cmysql\u7684use\u8BED\u53E5\uFF0C\u7F3A\u7701\u6253\u5F00
-            describeAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884Cmysql\u7684describe\u8BED\u53E5\uFF0C\u7F3A\u7701\u6253\u5F00
-            showAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884Cmysql\u7684show\u8BED\u53E5\uFF0C\u7F3A\u7701\u6253\u5F00
-            commitAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884Ccommit\u64CD\u4F5C
-            rollbackAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u6267\u884Croll back\u64CD\u4F5C
+            #如果把selectIntoAllow、deleteAllow、updateAllow、insertAllow、mergeAllow都设置为false，这就是一个只读数据源了
+            selelctAllow: true    #默认true, 是否允许执行SELECT语句
+            selectAllColumnAllow: true    #默认true, 是否允许执行SELECT * FROM T这样的语句。如果设置为false，不允许执行select * from t，但select * from (select id, name from t) a。这个选项是防御程序通过调用select *获得数据表的结构信息。
+            selectIntoAllow: true    #默认true, SELECT查询中是否允许INTO字句
+            deleteAllow: true    #默认true, 是否允许执行DELETE语句
+            updateAllow: true    #默认true, 是否允许执行UPDATE语句
+            insertAllow: true    #默认true, 是否允许执行INSERT语句
+            replaceAllow: true    #默认true, 是否允许执行REPLACE语句
+            mergeAllow: true    #默认true, 是否允许执行MERGE语句，这个只在Oracle中有用
+            callAllow: true    #默认true, 是否允许通过jdbc的call语法调用存储过程
+            setAllow: true    #默认true, 是否允许使用SET语法
+            truncateAllow: true    #默认true, truncate语句是危险，缺省打开，若需要自行关闭
+            createTableAllow: true    #默认true, 是否允许创建表
+            alterTableAllow: true    #默认true, 是否允许执行Alter Table语句
+            dropTableAllow: true    #默认true, 是否允许修改表
+            commentAllow: false    #默认false, 是否允许语句中存在注释，Oracle的用户不用担心，Wall能够识别hints和注释的区别
+            noneBaseStatementAllow: false    #默认false, 是否允许非以上基本语句的其他语句，缺省关闭，通过这个选项就能够屏蔽DDL。
+            multiStatementAllow: false    #默认false, 是否允许一次执行多条语句，缺省关闭
+            useAllow: true    #默认true, 是否允许执行mysql的use语句，缺省打开
+            describeAllow: true    #默认true, 是否允许执行mysql的describe语句，缺省打开
+            showAllow: true    #默认true, 是否允许执行mysql的show语句，缺省打开
+            commitAllow: true    #默认true, 是否允许执行commit操作
+            rollbackAllow: true    #默认true, 是否允许执行roll back操作
 
-            ## \u62E6\u622A\u914D\u7F6E\uFF0D\u6C38\u771F\u6761\u4EF6
-            selectWhereAlwayTrueCheck: true    #\u9ED8\u8BA4true, \u68C0\u67E5SELECT\u8BED\u53E5\u7684WHERE\u5B50\u53E5\u662F\u5426\u662F\u4E00\u4E2A\u6C38\u771F\u6761\u4EF6
-            selectHavingAlwayTrueCheck: true    #\u9ED8\u8BA4true, \u68C0\u67E5SELECT\u8BED\u53E5\u7684HAVING\u5B50\u53E5\u662F\u5426\u662F\u4E00\u4E2A\u6C38\u771F\u6761\u4EF6
-            deleteWhereAlwayTrueCheck: true    #\u9ED8\u8BA4true, \u68C0\u67E5DELETE\u8BED\u53E5\u7684WHERE\u5B50\u53E5\u662F\u5426\u662F\u4E00\u4E2A\u6C38\u771F\u6761\u4EF6
-            deleteWhereNoneCheck: false    #\u9ED8\u8BA4false, \u68C0\u67E5DELETE\u8BED\u53E5\u662F\u5426\u65E0where\u6761\u4EF6\uFF0C\u8FD9\u662F\u6709\u98CE\u9669\u7684\uFF0C\u4F46\u4E0D\u662FSQL\u6CE8\u5165\u7C7B\u578B\u7684\u98CE\u9669
-            updateWhereAlayTrueCheck: true    #\u9ED8\u8BA4true, \u68C0\u67E5UPDATE\u8BED\u53E5\u7684WHERE\u5B50\u53E5\u662F\u5426\u662F\u4E00\u4E2A\u6C38\u771F\u6761\u4EF6
-            updateWhereNoneCheck: false    #\u9ED8\u8BA4false, \u68C0\u67E5UPDATE\u8BED\u53E5\u662F\u5426\u65E0where\u6761\u4EF6\uFF0C\u8FD9\u662F\u6709\u98CE\u9669\u7684\uFF0C\u4F46\u4E0D\u662FSQL\u6CE8\u5165\u7C7B\u578B\u7684\u98CE\u9669
-            conditionAndAlwayTrueAllow: false    #\u9ED8\u8BA4false, \u68C0\u67E5\u67E5\u8BE2\u6761\u4EF6(WHERE/HAVING\u5B50\u53E5)\u4E2D\u662F\u5426\u5305\u542BAND\u6C38\u771F\u6761\u4EF6
-            conditionAndAlwayFalseAllow: false    #\u9ED8\u8BA4false, \u68C0\u67E5\u67E5\u8BE2\u6761\u4EF6(WHERE/HAVING\u5B50\u53E5)\u4E2D\u662F\u5426\u5305\u542BAND\u6C38\u5047\u6761\u4EF6
-            conditionLikeTrueAllow: true    #\u9ED8\u8BA4true, \u68C0\u67E5\u67E5\u8BE2\u6761\u4EF6(WHERE/HAVING\u5B50\u53E5)\u4E2D\u662F\u5426\u5305\u542BLIKE\u6C38\u771F\u6761\u4EF6
+            ## 拦截配置－永真条件
+            selectWhereAlwayTrueCheck: true    #默认true, 检查SELECT语句的WHERE子句是否是一个永真条件
+            selectHavingAlwayTrueCheck: true    #默认true, 检查SELECT语句的HAVING子句是否是一个永真条件
+            deleteWhereAlwayTrueCheck: true    #默认true, 检查DELETE语句的WHERE子句是否是一个永真条件
+            deleteWhereNoneCheck: false    #默认false, 检查DELETE语句是否无where条件，这是有风险的，但不是SQL注入类型的风险
+            updateWhereAlayTrueCheck: true    #默认true, 检查UPDATE语句的WHERE子句是否是一个永真条件
+            updateWhereNoneCheck: false    #默认false, 检查UPDATE语句是否无where条件，这是有风险的，但不是SQL注入类型的风险
+            conditionAndAlwayTrueAllow: false    #默认false, 检查查询条件(WHERE/HAVING子句)中是否包含AND永真条件
+            conditionAndAlwayFalseAllow: false    #默认false, 检查查询条件(WHERE/HAVING子句)中是否包含AND永假条件
+            conditionLikeTrueAllow: true    #默认true, 检查查询条件(WHERE/HAVING子句)中是否包含LIKE永真条件
 
-            selectIntoOutfileAllow: false    #\u9ED8\u8BA4false, SELECT ... INTO OUTFILE \u662F\u5426\u5141\u8BB8\uFF0C\u8FD9\u4E2A\u662Fmysql\u6CE8\u5165\u653B\u51FB\u7684\u5E38\u89C1\u624B\u6BB5\uFF0C\u7F3A\u7701\u662F\u7981\u6B62\u7684
-            selectUnionCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4BSELECT UNION
-            selectMinusCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4BSELECT MINUS
-            selectExceptCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4BSELECT EXCEPT
-            selectIntersectCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4BSELECT INTERSECT
-            mustParameterized: false    #\u9ED8\u8BA4false, \u662F\u5426\u5FC5\u987B\u53C2\u6570\u5316\uFF0C\u5982\u679C\u4E3ATrue\uFF0C\u5219\u4E0D\u5141\u8BB8\u7C7B\u4F3CWHERE ID = 1\u8FD9\u79CD\u4E0D\u53C2\u6570\u5316\u7684SQL
-            strictSyntaxCheck: true    #\u9ED8\u8BA4true, \u662F\u5426\u8FDB\u884C\u4E25\u683C\u7684\u8BED\u6CD5\u68C0\u6D4B\uFF0CDruid SQL Parser\u5728\u67D0\u4E9B\u573A\u666F\u4E0D\u80FD\u8986\u76D6\u6240\u6709\u7684SQL\u8BED\u6CD5\uFF0C\u51FA\u73B0\u89E3\u6790SQL\u51FA\u9519\uFF0C\u53EF\u4EE5\u4E34\u65F6\u628A\u8FD9\u4E2A\u9009\u9879\u8BBE\u7F6E\u4E3Afalse\uFF0C\u540C\u65F6\u628ASQL\u53CD\u9988\u7ED9Druid\u7684\u5F00\u53D1\u8005\u3002
-            conditionOpXorAllow: false    #\u9ED8\u8BA4false, \u67E5\u8BE2\u6761\u4EF6\u4E2D\u662F\u5426\u5141\u8BB8\u6709XOR\u6761\u4EF6\u3002XOR\u4E0D\u5E38\u7528\uFF0C\u5F88\u96BE\u5224\u65AD\u6C38\u771F\u6216\u8005\u6C38\u5047\uFF0C\u7F3A\u7701\u4E0D\u5141\u8BB8\u3002
-            conditionOpBitwseAllow: true    #\u9ED8\u8BA4true, \u67E5\u8BE2\u6761\u4EF6\u4E2D\u662F\u5426\u5141\u8BB8\u6709"&"\u3001"~"\u3001"|"\u3001"^"\u8FD0\u7B97\u7B26\u3002
-            conditionDoubleConstAllow: false    #\u9ED8\u8BA4false, \u67E5\u8BE2\u6761\u4EF6\u4E2D\u662F\u5426\u5141\u8BB8\u8FDE\u7EED\u4E24\u4E2A\u5E38\u91CF\u8FD0\u7B97\u8868\u8FBE\u5F0F
-            minusAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8SELECT * FROM A MINUS SELECT * FROM B\u8FD9\u6837\u7684\u8BED\u53E5
-            intersectAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8SELECT * FROM A INTERSECT SELECT * FROM B\u8FD9\u6837\u7684\u8BED\u53E5
-            constArithmeticAllow: true    #\u9ED8\u8BA4true, \u62E6\u622A\u5E38\u91CF\u8FD0\u7B97\u7684\u6761\u4EF6\uFF0C\u6BD4\u5982\u8BF4WHERE FID = 3 - 1\uFF0C\u5176\u4E2D"3 - 1"\u662F\u5E38\u91CF\u8FD0\u7B97\u8868\u8FBE\u5F0F\u3002
-            limitZeroAllow: false    #\u9ED8\u8BA4false, \u662F\u5426\u5141\u8BB8limit 0\u8FD9\u6837\u7684\u8BED\u53E5
-            selectLimit: -1        #\u9ED8\u8BA4-1, \u914D\u7F6E\u6700\u5927\u8FD4\u56DE\u884C\u6570\uFF0C\u5982\u679Cselect\u8BED\u53E5\u6CA1\u6709\u6307\u5B9A\u6700\u5927\u8FD4\u56DE\u884C\u6570\uFF0C\u4F1A\u81EA\u52A8\u4FEE\u6539selct\u6DFB\u52A0\u8FD4\u56DE\u9650\u5236
+            selectIntoOutfileAllow: false    #默认false, SELECT ... INTO OUTFILE 是否允许，这个是mysql注入攻击的常见手段，缺省是禁止的
+            selectUnionCheck: true    #默认true, 检测SELECT UNION
+            selectMinusCheck: true    #默认true, 检测SELECT MINUS
+            selectExceptCheck: true    #默认true, 检测SELECT EXCEPT
+            selectIntersectCheck: true    #默认true, 检测SELECT INTERSECT
+            mustParameterized: false    #默认false, 是否必须参数化，如果为True，则不允许类似WHERE ID = 1这种不参数化的SQL
+            strictSyntaxCheck: true    #默认true, 是否进行严格的语法检测，Druid SQL Parser在某些场景不能覆盖所有的SQL语法，出现解析SQL出错，可以临时把这个选项设置为false，同时把SQL反馈给Druid的开发者。
+            conditionOpXorAllow: false    #默认false, 查询条件中是否允许有XOR条件。XOR不常用，很难判断永真或者永假，缺省不允许。
+            conditionOpBitwseAllow: true    #默认true, 查询条件中是否允许有"&"、"~"、"|"、"^"运算符。
+            conditionDoubleConstAllow: false    #默认false, 查询条件中是否允许连续两个常量运算表达式
+            minusAllow: true    #默认true, 是否允许SELECT * FROM A MINUS SELECT * FROM B这样的语句
+            intersectAllow: true    #默认true, 是否允许SELECT * FROM A INTERSECT SELECT * FROM B这样的语句
+            constArithmeticAllow: true    #默认true, 拦截常量运算的条件，比如说WHERE FID = 3 - 1，其中"3 - 1"是常量运算表达式。
+            limitZeroAllow: false    #默认false, 是否允许limit 0这样的语句
+            selectLimit: -1        #默认-1, 配置最大返回行数，如果select语句没有指定最大返回行数，会自动修改selct添加返回限制
 
-            tableCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4B\u662F\u5426\u4F7F\u7528\u4E86\u7981\u7528\u7684\u8868
-            schemaCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4B\u662F\u5426\u4F7F\u7528\u4E86\u7981\u7528\u7684Schema
-            functionCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4B\u662F\u5426\u4F7F\u7528\u4E86\u7981\u7528\u7684\u51FD\u6570
-            objectCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4B\u662F\u5426\u4F7F\u7528\u4E86\u201C\u7981\u7528\u5BF9\u5BF9\u8C61\u201D
-            variantCheck: true    #\u9ED8\u8BA4true, \u68C0\u6D4B\u662F\u5426\u4F7F\u7528\u4E86\u201C\u7981\u7528\u7684\u53D8\u91CF\u201D
-            #readOnlyTables: 	    #\u9ED8\u8BA4\u7A7A, \u6307\u5B9A\u7684\u8868\u53EA\u8BFB\uFF0C\u4E0D\u80FD\u591F\u5728SELECT INTO\u3001DELETE\u3001UPDATE\u3001INSERT\u3001MERGE\u4E2D\u4F5C\u4E3A"\u88AB\u4FEE\u6539\u8868"\u51FA\u73B0
+            tableCheck: true    #默认true, 检测是否使用了禁用的表
+            schemaCheck: true    #默认true, 检测是否使用了禁用的Schema
+            functionCheck: true    #默认true, 检测是否使用了禁用的函数
+            objectCheck: true    #默认true, 检测是否使用了“禁用对对象”
+            variantCheck: true    #默认true, 检测是否使用了“禁用的变量”
+            #readOnlyTables: 	    #默认空, 指定的表只读，不能够在SELECT INTO、DELETE、UPDATE、INSERT、MERGE中作为"被修改表"出现
 
-            metadataAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u8C03\u7528Connection.getMetadata\u65B9\u6CD5\uFF0C\u8FD9\u4E2A\u65B9\u6CD5\u8C03\u7528\u4F1A\u66B4\u9732\u6570\u636E\u5E93\u7684\u8868\u4FE1\u606F
-            wrapAllow: true    #\u9ED8\u8BA4true, \u662F\u5426\u5141\u8BB8\u8C03\u7528Connection/Statement/ResultSet\u7684isWrapFor\u548Cunwrap\u65B9\u6CD5\uFF0C\u8FD9\u4E24\u4E2A\u65B9\u6CD5\u8C03\u7528\uFF0C\u4F7F\u5F97\u6709\u529E\u6CD5\u62FF\u5230\u539F\u751F\u9A71\u52A8\u7684\u5BF9\u8C61\uFF0C\u7ED5\u8FC7WallFilter\u7684\u68C0\u6D4B\u76F4\u63A5\u6267\u884CSQL\u3002
+            metadataAllow: true    #默认true, 是否允许调用Connection.getMetadata方法，这个方法调用会暴露数据库的表信息
+            wrapAllow: true    #默认true, 是否允许调用Connection/Statement/ResultSet的isWrapFor和unwrap方法，这两个方法调用，使得有办法拿到原生驱动的对象，绕过WallFilter的检测直接执行SQL。
         slf4j:
           enabled: true
           connection-log-enabled: true
@@ -170,34 +170,36 @@ spring:
 mybatis-plus:
   #datasource: datasource
   mapper-locations: classpath*:/mapper/**Mapper.xml
-  #\u5B9E\u4F53\u626B\u63CF\uFF0C\u591A\u4E2Apackage\u7528\u9017\u53F7\u6216\u8005\u5206\u53F7\u5206\u9694
+  #实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.he.helloupms.entity
-  #\u8BE5\u914D\u7F6E\u8BF7\u548C typeAliasesPackage \u4E00\u8D77\u4F7F\u7528\uFF0C\u5982\u679C\u914D\u7F6E\u4E86\u8BE5\u5C5E\u6027\uFF0C\u5219\u4EC5\u4EC5\u4F1A\u626B\u63CF\u8DEF\u5F84\u4E0B\u4EE5\u8BE5\u7C7B\u4F5C\u4E3A\u7236\u7C7B\u7684\u57DF\u5BF9\u8C61 \u3002
+  #该配置请和 typeAliasesPackage 一起使用，如果配置了该属性，则仅仅会扫描路径下以该类作为父类的域对象 。
   type-aliases-super-type: com.he.helloupms.common.BaseEntity
-  #\u679A\u4E3E\u7C7B\u626B\u63CF\u8DEF\u5F84\uFF0C\u5982\u679C\u914D\u7F6E\u4E86\u8BE5\u5C5E\u6027\uFF0C\u4F1A\u5C06\u8DEF\u5F84\u4E0B\u7684\u679A\u4E3E\u7C7B\u8FDB\u884C\u6CE8\u5165\uFF0C\u8BA9\u5B9E\u4F53\u7C7B\u5B57\u6BB5\u80FD\u591F\u7B80\u5355\u5FEB\u6377\u7684\u4F7F\u7528\u679A\u4E3E\u5C5E\u6027\u3002
-  typeEnumsPackage: com.he.enums
+  #枚举类扫描路径，如果配置了该属性，会将路径下的枚举类进行注入，让实体类字段能够简单快捷的使用枚举属性。
+  typeEnumsPackage: com.he.helloupms.enums
   #typeHandlersPackage:
-  #\u6307\u5B9A\u5916\u90E8\u5316 MyBatis Properties \u914D\u7F6E\uFF0C\u901A\u8FC7\u8BE5\u914D\u7F6E\u53EF\u4EE5\u62BD\u79BB\u914D\u7F6E\uFF0C\u5B9E\u73B0\u4E0D\u540C\u73AF\u5883\u7684\u914D\u7F6E\u90E8\u7F72\u3002
+  #指定外部化 MyBatis Properties 配置，通过该配置可以抽离配置，实现不同环境的配置部署。
   #configuration-properties: classpath:mybatis/config.properties
   global-config:
     db-config:
-      #\u4E3B\u952E\u7C7B\u578B
+      #主键类型
       id-type: id_worker
-      #\u5B57\u6BB5\u7B56\u7565
+      #字段策略
       field-strategy: not_null
-      #\u662F\u5426\u5F00\u542F\u5927\u5199\u547D\u540D\uFF0C\u9ED8\u8BA4\u4E0D\u5F00\u542F
+      #是否开启大写命名，默认不开启
       #capital-mode: true
-      #\u903B\u8F91\u5220\u9664\u914D\u7F6E\uFF08\u4E0B\u97623\u4E2A\u914D\u7F6E\uFF09
+      #逻辑删除配置（下面3个配置）
       logic-delete-value: 0
       logic-not-delete-value: 1
+      #表名、是否使用下划线命名，默认数据库表使用下划线命名
+      table-underline: false
   configuration:
-    #\u9ED8\u8BA4\u679A\u4E3E\u5904\u7406\u7C7B,\u5982\u679C\u914D\u7F6E\u4E86\u8BE5\u5C5E\u6027,\u679A\u4E3E\u5C06\u7EDF\u4E00\u4F7F\u7528\u6307\u5B9A\u5904\u7406\u5668\u8FDB\u884C\u5904\u7406
-    #org.apache.ibatis.type.EnumTypeHandler: \u5B58\u50A8\u679A\u4E3E\u7684\u540D\u79F0
-    #org.apache.ibatis.type.EnumOrdinalTypeHandler: \u5B58\u50A8\u679A\u4E3E\u7684\u7D22\u5F15
-    #com.baomidou.mybatisplus.extension.handlers.EnumTypeHandler: \u679A\u4E3E\u7C7B\u9700\u8981\u5B9E\u73B0IEnum\u63A5\u53E3\u6216\u5B57\u6BB5\u6807\u8BB0@EnumValue\u6CE8\u89E3.
+    #默认枚举处理类,如果配置了该属性,枚举将统一使用指定处理器进行处理
+    #org.apache.ibatis.type.EnumTypeHandler: 存储枚举的名称
+    #org.apache.ibatis.type.EnumOrdinalTypeHandler: 存储枚举的索引
+    #com.baomidou.mybatisplus.extension.handlers.EnumTypeHandler: 枚举类需要实现IEnum接口或字段标记@EnumValue注解.
     default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.EnumTypeHandler
-    #\u662F\u5426\u5F00\u542F\u81EA\u52A8\u9A7C\u5CF0\u547D\u540D\u89C4\u5219\u6620\u5C04\uFF0C\u5373\u4ECE\u7ECF\u5178\u6570\u636E\u5E93\u5217\u540DA_COLUMN\uFF08\u4E0B\u5212\u7EBF\u547D\u540D\uFF09\u5230\u7ECF\u5178Java\u5C5E\u6027\u540DaColumn\uFF08\u9A7C\u5CF0\u547D\u540D\uFF09\u7684\u7C7B\u4F3C\u6620\u5C04\u3002
-    #\u9ED8\u8BA4true
+    #是否开启自动驼峰命名规则映射，即从经典数据库列名A_COLUMN（下划线命名）到经典Java属性名aColumn（驼峰命名）的类似映射。
+    #默认true
     map-underscore-to-camel-case: false
-    #\u5168\u5C40\u5730\u5F00\u542F\u6216\u5173\u95ED\u914D\u7F6E\u6587\u4EF6\u4E2D\u7684\u6240\u6709\u6620\u5C04\u5668\u5DF2\u7ECF\u914D\u7F6E\u7684\u4EFB\u4F55\u7F13\u5B58\uFF0C\u9ED8\u8BA4\u4E3A true\u3002
+    #全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存，默认为 true。
     cache-enabled: false
