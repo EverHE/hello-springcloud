@@ -18,9 +18,6 @@ public class UserController extends BaseController<SysUser,IUserService> {
     @GetMapping("findByUsername/{username}")
     public Result findByUsername(@PathVariable("username") String username){
         SysUser user = service.findByUsername(username);
-        if (user == null){
-            return Result.fail();
-        }
-        return Result.success();
+        return Result.success(user);
     }
 }

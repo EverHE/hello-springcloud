@@ -13,7 +13,7 @@ public class UserServiceImpl extends BaseService<ISysUserMapper, SysUser> implem
     @Override
     public SysUser findByUsername(String username) {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("userName", "lqf");
+        queryWrapper.eq("userName", username);
         return baseMapper.selectOne(queryWrapper);
     }
 }

@@ -16,6 +16,17 @@ eureka:
 #         1、如果配置了feign.hystrix.enabled，且值为false，则访问的时候，页面会报Connection refused的错误，比如：Connection refused: connect executing GET http://sea-service-user/person/1
 #         2、如果没有配置feign.hystrix.enabled，则访问的时候，页面会报客户端异常，比如：com.netflix.client.ClientException: Load balancer does not have available server for client: sea-service-user
 feign:
+  compression:
+    #响应GZIP压缩
+    response:
+      enabled: true
+    #请求GZIP压缩
+    request:
+      enabled: true
+      #压缩支持的MIME TYPE
+      mime-types: ["text/html","application/xml","application/json"]
+      #压缩数据大小的下限
+      min-request-size: 2048
   hystrix:
     enabled: true
 

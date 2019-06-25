@@ -1,8 +1,11 @@
 package com.he.helloupms.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import com.he.helloupms.handler.MyMetaObjectHandler;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -10,19 +13,22 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan("com.he.helloupms.mapper")
-//@MapperScan({"com.he.dao.mapper.sys*","com.he.dao.mapper.biz*"})
 public class MybatisPlusConfig {
 
     /**
-     * mybatis-plus SQL执行效率插件【生产环境可以关闭】
+     * 性能分析拦截器，不建议生产使用
+     * 用来观察 SQL 执行情况及执行时长
      */
-    //@Bean
-//    public PerformanceInterceptor performanceInterceptor() {
-//        return new PerformanceInterceptor();
-//    }
+    @Bean
+    public PerformanceInterceptor performanceInterceptor() {
+        return new PerformanceInterceptor();
+    }
+
+
 
     /**
      * 乐观锁插件，需要实体对象有@version
+     * 开启此乐观锁，更新时必须带version，与数据库一致时才会更新成功
      * @return
      */
     @Bean
@@ -97,13 +103,16 @@ public class MybatisPlusConfig {
 //        return new H2KeyGenerator();
 //    }
 
-    /**
-     * 注入sql注入器
-     */
-    //@Bean
+//    /**
+//     * 注入sql注入器
+//     * 逻辑删除
+//     * 注:3.1.1后不需要
+//     */
+//    @Bean
 //    public ISqlInjector sqlInjector(){
 //        return new LogicSqlInjector();
 //    }
+
 
 //    /**
 //     * druid注入

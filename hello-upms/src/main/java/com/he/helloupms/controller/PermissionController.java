@@ -1,6 +1,5 @@
 package com.he.helloupms.controller;
 
-import com.he.helloupms.common.BaseController;
 import com.he.helloupms.common.Result;
 import com.he.helloupms.entity.SysMenu;
 import com.he.helloupms.service.IPermissionService;

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ISysMenuMapper extends IBaseMapper<SysMenu> {
-    @Select(value = "select menu.* from sys_menu menu,sys_privilege p where menu.id=p.menu_id and p.role_id=#{roleId}")
+    @Select(value = "select m.* from sysMenu m,sysRoleMenu rm where m.id=rm.menuId and rm.roleId=#{roleId}")
     List<SysMenu> getPermissionsByRoleId(Integer roleId);
 }

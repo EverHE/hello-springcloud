@@ -1,0 +1,51 @@
+server:
+  port: 9060
+
+spring:
+  application:
+    name: uaa
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/zuul-auth?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    ##\u7EED\u7EA6\u66F4\u65B0\u65F6\u95F4\u95F4\u9694\u8BBE\u7F6E5\u79D2\uFF0Cm\u9ED8\u8BA430s
+    lease-renewal-interval-in-seconds: 5
+    ##\u7EED\u7EA6\u5230\u671F\u65F6\u95F410\u79D2\uFF0C\u9ED8\u8BA4\u662F90\u79D2
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://mss-eureka1:9010/eureka/
+logging:
+  config: classpath:logback.xml
+  level:
+    org:
+      springframework:
+        web: info
+###feign \u9ED8\u8BA4\u5173\u95ED\u7194\u65AD\uFF0C\u8BF7\u770BHystrixFeignConfiguration
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
