@@ -1,5 +1,6 @@
 package com.he.hellooauth.controller;
 
+import com.he.hellocommon.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,16 +20,11 @@ public class LogoutController {
     private ConsumerTokenServices consumerTokenServices;
 
     @DeleteMapping(value = "/exit")
-    public @ResponseBody
-    Result revokeToken(String access_token){
-        Result msg = new Result();
+    public @ResponseBody Result revokeToken(String access_token){
         if (consumerTokenServices.revokeToken(access_token)){
-            msg.setCode(StatusCode.SUCCESS_CODE);
-            msg.setMsg("注销成功");
+            return Result.success();
         }else {
-            msg.setCode(StatusCode.FAILURE_CODE);
-            msg.setMsg("注销失败");
+            return Result.fail();
         }
-        return msg;
     }
 }

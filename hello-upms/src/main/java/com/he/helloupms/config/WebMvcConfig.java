@@ -9,16 +9,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Configuration
+@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 //    @Override
 //    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -67,17 +69,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
-        //定义一个Convert转换消息的对象
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-        //添加fastjson的配置信息，比如是否要格式化返回的json数据
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        FastJsonConfig fastJsonConfig= new FastJsonConfig();
+        fastJsonConfig.setCharset(Charset.forName("UTF-8"));
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteEnumUsingToString,SerializerFeature.WriteNonStringKeyAsString);
 
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,SerializerFeature.WriteNonStringKeyAsString);
-        List<MediaType> fastMedisTypes = new ArrayList<MediaType>();
+        fastConverter.setFastJsonConfig(fastJsonConfig);
+        List<MediaType> fastMedisTypes = new ArrayList();
         fastMedisTypes.add(MediaType.APPLICATION_JSON_UTF8);
         fastConverter.setSupportedMediaTypes(fastMedisTypes);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        return new HttpMessageConverters(fastConverter);
+
+
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        stringConverter.setDefaultCharset(Charset.forName("UTF-8"));
+        return new HttpMessageConverters(stringConverter,fastConverter);
+
     }
 
 //    @Bean

@@ -38,6 +38,10 @@
     <module>feign-hystrix</module>
     <module>route-zuul</module>
     <module>hello-upms</module>
+    <module>hello-oauth</module>
+    <module>hello-common</module>
+    <module>hello-baseweb</module>
+    <module>consul-client</module>
   </modules>
 
   <dependencyManagement>
@@ -125,4 +129,11 @@
       </plugins>
     </pluginManagement>
   </build>
+  <repositories>
+    <repository>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+    </repository>
+  </repositories>
 </project>
