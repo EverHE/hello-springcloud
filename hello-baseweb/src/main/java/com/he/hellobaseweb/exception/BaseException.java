@@ -2,7 +2,6 @@ package com.he.hellobaseweb.exception;
 
 
 /**
- * 
  * 异常基类，所有异常都必须继承于此异常
  */
 public class BaseException extends Exception {
@@ -22,7 +21,7 @@ public class BaseException extends Exception {
 
     /**
      * 实例化异常
-     * 
+     *
      * @param msgFormat
      * @param args
      * @return

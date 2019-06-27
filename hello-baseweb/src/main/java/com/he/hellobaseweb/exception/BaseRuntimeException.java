@@ -1,7 +1,6 @@
 package com.he.hellobaseweb.exception;
 
 
-
 public class BaseRuntimeException extends RuntimeException {
     private static final long serialVersionUID = 609281876732234454L;
     public static final int RUNTIME_EXCEPTION = 10000001;

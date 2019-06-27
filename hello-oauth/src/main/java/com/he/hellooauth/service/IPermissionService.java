@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "mss-upms",fallback = PermissionServiceImpl.class)
+@FeignClient(name = "mss-upms", fallback = PermissionServiceImpl.class)
 public interface IPermissionService {
     @GetMapping("permission/getRolePermission/{roleId}")
     Result getRolePermission(@PathVariable("roleId") Integer roleId);

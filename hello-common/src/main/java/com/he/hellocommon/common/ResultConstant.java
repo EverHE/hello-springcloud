@@ -10,8 +10,8 @@ public enum ResultConstant {
      */
     SUCCESS(1, "success");
 
-    public int code;
-    public String message;
+    private int code;
+    private String message;
 
     ResultConstant(int code, String message) {
         this.code = code;

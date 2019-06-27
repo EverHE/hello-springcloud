@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public abstract class BaseController<T extends BaseEntity,S extends IBaseService<T>> {
+public abstract class BaseController<T extends BaseEntity, S extends IBaseService<T>> {
     @Autowired
     protected S service;
 
@@ -27,7 +27,7 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
     public Result test2(@RequestBody Page<T> page) {
         QueryWrapper<T> qw = new QueryWrapper<>();
         //TODO 分页查询条件
-        service.page(page,qw);
+        service.page(page, qw);
         return Result.success(page);
     }
 
@@ -35,7 +35,7 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
     @ResponseBody
     public Result insert(@RequestBody T entity) {
         boolean b = service.save(entity);
-        if(b){
+        if (b) {
             return Result.success();
         }
         return Result.fail();
@@ -45,7 +45,7 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
     @ResponseBody
     public Result update(@RequestBody T entity) {
         boolean b = service.updateById(entity);
-        if(b){
+        if (b) {
             return Result.success();
         }
         return Result.fail();
@@ -55,7 +55,7 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
     @ResponseBody
     public Result delete(@PathVariable("id") Long id) {
         boolean b = service.removeById(id);
-        if(b){
+        if (b) {
             return Result.success();
         }
         return Result.fail();
@@ -65,7 +65,7 @@ public abstract class BaseController<T extends BaseEntity,S extends IBaseService
     @ResponseBody
     public Result deletes(@RequestBody List<Long> ids) {
         boolean b = service.removeByIds(ids);
-        if(b){
+        if (b) {
             return Result.success();
         }
         return Result.fail();

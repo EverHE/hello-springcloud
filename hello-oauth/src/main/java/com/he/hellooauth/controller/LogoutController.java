@@ -20,10 +20,11 @@ public class LogoutController {
     private ConsumerTokenServices consumerTokenServices;
 
     @DeleteMapping(value = "/exit")
-    public @ResponseBody Result revokeToken(String access_token){
-        if (consumerTokenServices.revokeToken(access_token)){
+    public @ResponseBody
+    Result revokeToken(String access_token) {
+        if (consumerTokenServices.revokeToken(access_token)) {
             return Result.success();
-        }else {
+        } else {
             return Result.fail();
         }
     }

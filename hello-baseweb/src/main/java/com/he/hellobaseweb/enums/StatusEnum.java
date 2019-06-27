@@ -3,8 +3,8 @@ package com.he.hellobaseweb.enums;
 import java.io.Serializable;
 
 public enum StatusEnum implements IBaseEnum {
-    STATUS_DELETE(0,"删除"),
-    STATUS_NORMAL(1,"正常");
+    STATUS_DELETE(0, "删除"),
+    STATUS_NORMAL(1, "正常");
 
     private int value;
     private String desc;
@@ -15,11 +15,11 @@ public enum StatusEnum implements IBaseEnum {
     }
 
     @Override
-    public Serializable getValue(){
+    public Serializable getValue() {
         return this.value;
     }
 
-    public Serializable getDesc(){
+    public Serializable getDesc() {
         return this.desc;
     }
 }

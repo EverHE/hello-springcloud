@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -19,6 +20,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
+
 
 @Configuration
 @EnableAuthorizationServer
@@ -36,7 +38,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private RedisConnectionFactory redisConnectionFactory;
 
     @Bean
-    RedisTokenStore redisTokenStore(){
+    RedisTokenStore redisTokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 
@@ -50,35 +52,38 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(clientDetails());
     }
+
     @Bean
     public ClientDetailsService clientDetails() {
         return new JdbcClientDetailsService(dataSource);
     }
-    @Bean
-    public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator(){
-        return new MssWebResponseExceptionTranslator();
-    }
+
+    //    @Bean
+//    public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator(){
+//        return new MssWebResponseExceptionTranslator();
+//    }
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(redisTokenStore())
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
-        endpoints.exceptionTranslator(webResponseExceptionTranslator());//认证异常翻译
+//        endpoints.exceptionTranslator(webResponseExceptionTranslator());//认证异常翻译
     }
 
     /**
      * <p>注意，自定义TokenServices的时候，需要设置@Primary，否则报错，</p>
+     *
      * @return
      */
     @Primary
     @Bean
-    public DefaultTokenServices defaultTokenServices(){
+    public DefaultTokenServices defaultTokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(redisTokenStore());
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setClientDetailsService(clientDetails());
-        tokenServices.setAccessTokenValiditySeconds(60*60*12); // token有效期自定义设置，默认12小时
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 12); // token有效期自定义设置，默认12小时
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);//默认30天，这里修改
         return tokenServices;
     }
@@ -86,7 +91,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()");
-        security .checkTokenAccess("isAuthenticated()");
+        security.checkTokenAccess("isAuthenticated()");
         security.allowFormAuthenticationForClients();
     }
 }

@@ -23,6 +23,7 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private static ThreadLocal<DateFormat> threadLocal = new ThreadLocal();
+
     /**
      * 解决前台日期字符串和后台controller接收JavaBean的Date类型不一致的问题
      *
@@ -31,8 +32,8 @@ public class GlobalExceptionHandler {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         DateFormat dateFormat = threadLocal.get();
-        if(dateFormat ==null){
-            dateFormat= new SimpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
+        if (dateFormat == null) {
+            dateFormat = new SimpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
             //严格解析
             dateFormat.setLenient(false);
         }
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-    @ExceptionHandler(value=Exception.class)
+    @ExceptionHandler(value = Exception.class)
     public ModelAndView allExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
         String errorMessage = null;
 

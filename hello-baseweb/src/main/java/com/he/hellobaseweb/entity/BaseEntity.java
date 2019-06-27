@@ -15,7 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class BaseEntity<PK>{
+public class BaseEntity<PK> {
 
     private PK id;
 
@@ -57,7 +57,6 @@ public class BaseEntity<PK>{
         this.version = 0;
         this.status = StatusEnum.STATUS_NORMAL;
     }
-
 
 
     public String generateUuid() {
